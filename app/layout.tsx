@@ -14,15 +14,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={inter.className}>
         <AuthCheck>
           <NavMenu />
-          <main>{children}</main>
+          <main className="flex items-center justify-center min-w-full my-5">{children}</main>
+          {modal}
         </AuthCheck>
       </body>
     </html>
