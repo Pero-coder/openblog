@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma"
 
 import Image from "next/image"
 import Link from "next/link"
+import Markdown from "react-markdown"
 
 export default async function PostPage({ params }: { params: { postId: string } }) {
     const post = await prisma.post.findUnique({
@@ -31,7 +32,7 @@ export default async function PostPage({ params }: { params: { postId: string } 
             </div>
             <h1 className="text-3xl font-bold">{post.title}</h1>
             <Image alt="" src={post.imageUrl} width={16*50} height={9*50}/>
-            <article>{post.content}</article>
+            <Markdown className="prose lg:prose-xl">{post.content}</Markdown>
         </div>
     )
 }
