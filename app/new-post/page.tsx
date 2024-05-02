@@ -1,5 +1,16 @@
+"use client"
+
 import createPost from "../createPost"
 
+import { useFormStatus } from "react-dom"
+
+function SubmitButton() {
+    const { pending } = useFormStatus()
+
+    return (
+        <button type="submit" disabled={pending} className={`px-4 py-2 text-white rounded max-w-32 ${pending ? "bg-slate-500" : "bg-blue-500 hover:bg-blue-400"}`}>{pending ? "Sending post..." : "Create Post"}</button>
+    )
+}
 
 export default function CreateNewPost() {
     return (
@@ -18,7 +29,7 @@ export default function CreateNewPost() {
                 <p>
                     <textarea name="content" placeholder="Content..." className="resize-none w-full h-96 placeholder-gray-500 focus:outline-none bg-slate-100 p-5 rounded-md" required />
                 </p>
-                <button type="submit" className={`px-4 py-2 text-white rounded max-w-32 bg-blue-500 hover:bg-blue-400`}>Create Post</button>
+                <SubmitButton />
             </form>
         </div>
     )
