@@ -28,7 +28,8 @@ export default async function PostPage({ params }: { params: { postId: string } 
                     <Image src={user?.image as string} alt="" width={50} height={50} className="rounded-full"/>
                 </Link>
                 <p>{user?.name}</p>
-                <p>{`${post.createdAt.getHours()}:${post.createdAt.getMinutes()} ${post.createdAt.getDate()}.${post.createdAt.getMonth()}. ${post.createdAt.getFullYear()}`}</p>
+                <p>{post.createdAt.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
+                <p>{post.createdAt.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
             </div>
             <h1 className="text-3xl font-bold">{post.title}</h1>
             <Image alt="" src={post.imageUrl} width={16*50} height={9*50}/>
