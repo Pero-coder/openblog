@@ -4,7 +4,7 @@ import NewPostButton from "@/components/NewPostButton";
 import PostThumbnail from "@/components/PostThumbnail";
 
 export default async function Home() {
-  const posts = await prisma.post.findMany()
+  const posts = (await prisma.post.findMany()).reverse()
 
   return (
     <>
