@@ -9,7 +9,8 @@ export default async function Home() {
   return (
     <>
       <div className="flex flex-col gap-5">
-      {posts.map(post => <PostThumbnail post={post} key={post.id}/>)}
+        {posts.map(post => <PostThumbnail post={post} key={post.id}/>)}
+        <p>There are no more posts 😢</p>
       </div>
       <div className="fixed bottom-0 right-0 mb-10 mr-10"><NewPostButton/></div>
     </>

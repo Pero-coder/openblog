@@ -31,6 +31,7 @@ export default async function UserProfile({ params }: { params: { userId: string
             </div>
             <div className="flex flex-col gap-5">
                 {posts.map(post => <PostThumbnail post={post} key={post.id}/>)}
+                <p>There are no more posts 😢</p>
             </div>
         </div>
     )
