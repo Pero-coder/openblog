@@ -21,7 +21,7 @@ export function Modal() {
       ref={dialogRef}
       onClick={closeModal}
       onClose={router.back}
-      className="backdrop:bg-black/10 backdrop:backdrop-blur-sm rounded-lg border-2 border-black p-10 w-auto h-auto"
+      className="backdrop:bg-black/10 backdrop:backdrop-blur-sm rounded-lg border-2 border-black p-10 w-auto max-w-7xl h-auto"
     >
       <CreateNewPost />
     </dialog>
