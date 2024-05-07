@@ -32,7 +32,7 @@ export default async function PostPage({ params }: { params: { postId: string } 
                 <p>{post.createdAt.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
             </div>
             <h1 className="text-3xl font-bold">{post.title}</h1>
-            <Image alt="" src={post.imageUrl} width={16*50} height={9*50}/>
+            <img alt="" src={post.imageUrl}/>
             <Markdown className="prose lg:prose-xl">{post.content}</Markdown>
         </div>
     )
