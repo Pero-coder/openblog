@@ -43,7 +43,7 @@ export default function CreateNewPost() {
                     <input type="text" name="image" placeholder="Image link" className="w-full h-7 placeholder-gray-500 focus:outline-none bg-slate-100 p-5 rounded-md" required/>
                 </p>
 
-                <p className="border-2 border-yellow-500 text-black px-4 py-2 rounded-md mb-4 bg-yellow-500 bg-opacity-50">Rate limit for blob store reached so only image links now work</p>
+                <p className="border-2 border-yellow-500 text-black px-4 py-2 rounded-md mb-4 bg-yellow-500 bg-opacity-50">Due to reaching the rate limit for the blob store, only image links currently work</p>
                 
                 <Dropzone onDrop={onDrop} maxFiles={1} accept={{'image/*': []}}>
                     {({getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject}) => (
