@@ -15,6 +15,7 @@
     "@vercel/blob": "^0.23.2",
     "next": "14.2.2",
     "next-auth": "^5.0.0-beta.16",
+    "nextjs-toploader": "^1.6.12",
     "react": "^18",
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",

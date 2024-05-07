@@ -4,6 +4,7 @@ import "./globals.css";
 
 import AuthCheck from "@/components/AuthCheck";
 import NavMenu from "./NavMenu";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <NextTopLoader shadow="false" color="#3b82f6" />
         <AuthCheck>
           <NavMenu />
           <main className="flex flex-col items-center justify-center mx-auto max-w-3xl p-5">{children}</main>
