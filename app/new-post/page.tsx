@@ -49,7 +49,7 @@ export default function CreateNewPost() {
                     {({getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject}) => (
                         <section >
                             <div {...getRootProps({className: `cursor-pointer flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-md transition-colors duration-200 ease-in-out ${!isDragActive && "border-gray-300 hover:bg-gray-100"} ${isDragAccept && "border-green-300 bg-green-100"} ${isDragReject && "border-red-300 bg-red-100"}`})}>
-                                <input {...getInputProps({type: "file", accept: "image/*", required: true})} />
+                                <input {...getInputProps({type: "file", accept: "image/*"})} />
                                 {previewSrc ? <img src={previewSrc} alt="preview" className="max-w-2xl h-auto" /> : <p className="text-gray-500">Drag &apos;n&apos; drop image file here, or click to select</p>}
                             </div>
                         </section>
