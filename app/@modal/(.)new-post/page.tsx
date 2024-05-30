@@ -1,5 +1,10 @@
-import { Modal } from './modal';
+import { Modal } from '../modal';
+import CreateNewPost from "@/app/new-post/page"
 
 export default function NewPostModal() {
-  return <Modal/>;
+  return (
+      <Modal>
+        <CreateNewPost />
+      </Modal>
+    );
 }

@@ -3,9 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useEffect, useRef } from "react"
 
-import CreateNewPost from "@/app/new-post/page"
-
-export function Modal() {
+export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const dialogRef = useRef<React.ElementRef<"dialog">>(null)
 
@@ -23,7 +21,7 @@ export function Modal() {
       onClose={router.back}
       className="backdrop:bg-black/10 backdrop:backdrop-blur-sm rounded-lg border-2 border-black p-10 w-auto max-w-7xl h-auto"
     >
-      <CreateNewPost />
+      { children }
     </dialog>
   )
 }
