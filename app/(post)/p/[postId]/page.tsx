@@ -24,7 +24,7 @@ export default async function PostPage({ params }: { params: { postId: string } 
     return (
         <div className="flex flex-col gap-5">
             <div className="flex flex-row gap-5 items-center">
-                <Link href={`/${user?.id}`}>
+                <Link href={`/u/${user?.userName}`}>
                     <Image src={user?.image as string} alt="" width={50} height={50} className="rounded-full"/>
                 </Link>
                 <p>{user?.name}</p>

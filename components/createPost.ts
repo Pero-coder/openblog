@@ -24,5 +24,5 @@ export default async function createPost(form: FormData) {
         }
     })
 
-    redirect(`/${session.user?.id}/${post.id}`)
+    redirect(`/p/${post.id}`)
 }

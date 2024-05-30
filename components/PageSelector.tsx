@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useFormStatus } from "react-dom";
 
-import { SignIn } from "@/components/sign-in";
+import { SignIn } from "@/components/SignButtons/sign-in";
 import createUsername from "./createUsername";
 
 function SubmitButton() {
@@ -15,7 +15,7 @@ function SubmitButton() {
   )
 }
 
-export default function WelcomePage({ children }: { children: React.ReactNode }) {
+export default function PageSelector({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession();
   const pathname = usePathname();
   

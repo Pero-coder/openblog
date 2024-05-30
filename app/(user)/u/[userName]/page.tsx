@@ -4,22 +4,22 @@ import Image from "next/image"
 import Link from "next/link"
 import PostThumbnail from "@/components/PostThumbnail"
 
-export default async function UserProfile({ params }: { params: { userId: string } }) {
+export default async function UserProfile({ params }: { params: { userName: string } }) {
     const user = await prisma.user.findUnique({
         where: {
-            id: params.userId
-        }
-    })
-
-    const posts = await prisma.post.findMany({
-        where: {
-            authorId: params.userId
+            userName: params.userName
         }
     })
 
     if (!user) {
         return <div>User not found</div>
     }
+
+    const posts = await prisma.post.findMany({
+        where: {
+            authorId: user.id
+        }
+    })
 
     return (
         <div className="flex flex-col gap-10">
