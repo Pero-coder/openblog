@@ -1,6 +1,10 @@
-import { useFormStatus } from "react-dom";
+import { useFormStatus, useFormState } from "react-dom";
 import createUsername from "./ServerActions/createUsername";
 import { useState, useEffect } from "react";
+
+const initialState = {
+    message: '',
+}
 
 function SubmitButton({ validInput }: { validInput: boolean }) {
     const { pending } = useFormStatus()
@@ -13,6 +17,7 @@ function SubmitButton({ validInput }: { validInput: boolean }) {
 export default function CreateUsernamePage() {
     const [userName, setUserName] = useState("")
     const [validInput, setValidInput] = useState(false)
+    const [state, formAction] = useFormState(createUsername, initialState)
 
     const handleUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserName(e.target.value)
@@ -28,7 +33,12 @@ export default function CreateUsernamePage() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-            <form className="p-6 bg-white rounded shadow-md" action={createUsername}>
+            {state.message && (
+                <div className="p-4 mb-4 bg-red-500 text-white rounded">
+                    <p>{ state.message }</p>
+                </div>
+            )}
+            <form className="p-6 bg-white rounded shadow-md" action={formAction}>
                 <h1 className="py-5 text-xl font-semibold text-center">Create a username:</h1>
                 <input 
                     type="text" 
