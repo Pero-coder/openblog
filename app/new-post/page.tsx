@@ -1,6 +1,6 @@
 "use client"
 
-import createPost from "../../components/createPost"
+import createPost from "@/components/ServerActions/createPost"
 
 import { useFormStatus } from "react-dom"
 import Dropzone from "react-dropzone"
