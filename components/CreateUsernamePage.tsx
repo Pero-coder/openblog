@@ -32,25 +32,32 @@ export default function CreateUsernamePage() {
     }, [userName]);
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-            {state.message && (
-                <div className="p-4 mb-4 bg-red-500 text-white rounded">
-                    <p>{ state.message }</p>
+        <div className="flex flex-col gap-5 items-center justify-center min-h-screen bg-gray-100">
+            <div className="flex flex-col gap-5 w-full max-w-md mx-auto shadow-md bg-white p-6 rounded-lg">
+                <div className="text-center">
+                    <p className="mb-4 text-gray-700">Thanks for creating an account on</p>
+                    <h1 className="mb-2 text-4xl font-semibold text-blue-500">OpenBlog</h1>
+                    <p className="text-gray-700">In order to continue, please create a username:</p>
                 </div>
-            )}
-            <form className="p-6 bg-white rounded shadow-md" action={formAction}>
-                <h1 className="py-5 text-xl font-semibold text-center">Create a username:</h1>
-                <input 
-                    type="text" 
-                    name="userName" 
-                    placeholder="Username"
-                    value={userName}
-                    onChange={handleUserNameChange}
-                    required 
-                    className={`w-full p-2 mb-4 rounded transition-colors duration-500 ease-in-out ${validInput ? 'bg-gray-100' : 'bg-red-100'}`}
-                />
-                <SubmitButton validInput={validInput} />
-            </form>
+                {state.message && (
+                    <div className="p-4 mb-4 bg-red-500 text-white rounded">
+                        <p>{ state.message }</p>
+                    </div>
+                )}
+                <form action={formAction}>
+                    <input
+                        type="text"
+                        name="userName"
+                        placeholder="Username"
+                        value={userName}
+                        onChange={handleUserNameChange}
+                        maxLength={20}
+                        required
+                        className={`w-full p-2 mb-4 rounded transition-colors duration-500 ease-in-out ${validInput ? 'bg-gray-100' : 'bg-red-100'}`}
+                    />
+                    <SubmitButton validInput={validInput} />
+                </form>
+            </div>
         </div>
     )
 }
