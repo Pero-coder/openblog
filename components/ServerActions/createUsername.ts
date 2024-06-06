@@ -1,7 +1,6 @@
 "use server"
 
 import { prisma } from "@/lib/prisma"
-import { redirect } from "next/navigation"
 import { auth } from "@/auth"
 import { z } from "zod"
 
@@ -10,7 +9,8 @@ export default async function createUsername(prevState: any, form: FormData) {
     
     if (!session) {
         return {
-            message: "Not authenticated"
+            message: "Not authenticated",
+            type: "error"
         }
     }
 
@@ -22,12 +22,11 @@ export default async function createUsername(prevState: any, form: FormData) {
             message: "Username must be URL safe"
         })
         .safeParse(form.get("userName"))
-    
-    // return { message: "(test submit)" }
 
     if (!username.success) {
         return {
-            message: username.error?.message
+            message: username.error?.errors[0]?.message,
+            type: "error"
         }
     }
 
@@ -39,11 +38,11 @@ export default async function createUsername(prevState: any, form: FormData) {
 
     if (userNameExist) {
         return {
-            message: "Username already taken"
+            message: "Username already taken",
+            type: "warning"
         }
     }
     
-
     await prisma.user.update({
         where: {
             id: session?.user.id
@@ -53,9 +52,8 @@ export default async function createUsername(prevState: any, form: FormData) {
         }
     })
 
-    redirect("/")
-    
     return {
-        message: "Username created successfully"
+        message: "Username created successfully",
+        type: "success"
     }
 }

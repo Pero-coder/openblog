@@ -3,8 +3,8 @@
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 
-import WelcomePage from "./WelcomePage";
-import CreateUsernamePage from "./CreateUsernamePage";
+import WelcomePage from "@/components/WelcomePage";
+import CreateUsernamePage from "@/components/CreateUsernamePage";
 
 export default function PageSelector({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession();

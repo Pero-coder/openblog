@@ -1,16 +1,23 @@
 import { useFormStatus, useFormState } from "react-dom";
-import createUsername from "./ServerActions/createUsername";
+import createUsername from "@/components/ServerActions/createUsername";
 import { useState, useEffect } from "react";
 
 const initialState = {
     message: '',
+    type: ''
 }
 
-function SubmitButton({ validInput }: { validInput: boolean }) {
+function SubmitButton({ validInput, state }: { validInput: boolean, state: string }) {
     const { pending } = useFormStatus()
 
     return (
-        <button type="submit" disabled={(pending || !validInput)} className={`px-4 py-2 text-white rounded ${(pending || !validInput) ? "bg-slate-500" : "bg-blue-500 hover:bg-blue-400"}`}>{pending ? "Please wait..." : "Create username"}</button>
+        <button 
+            type="submit" 
+            disabled={(pending || !validInput || state === "success")} 
+            className={`px-4 py-2 text-white rounded ${(pending || !validInput) ? "bg-slate-500" : state === "success" ? "bg-green-400" : "bg-blue-500 hover:bg-blue-400"}`}
+        >
+            {pending ? "Please wait..." : state === "success" ? "Success" : "Create username"}
+        </button>
     )
 }
 
@@ -31,6 +38,12 @@ export default function CreateUsernamePage() {
         setValidInput(isUrlSafe(userName));
     }, [userName]);
 
+    useEffect(() => {
+        if (state?.type === "success") {
+            window.location.reload();
+        }
+    }, [state]);
+
     return (
         <div className="flex flex-col gap-5 items-center justify-center min-h-screen bg-gray-100">
             <div className="flex flex-col gap-5 w-full max-w-md mx-auto shadow-md bg-white p-6 rounded-lg">
@@ -39,8 +52,8 @@ export default function CreateUsernamePage() {
                     <h1 className="mb-2 text-4xl font-semibold text-blue-500">OpenBlog</h1>
                     <p className="text-gray-700">In order to continue, please create a username:</p>
                 </div>
-                {state.message && (
-                    <div className="p-4 mb-4 bg-red-500 text-white rounded">
+                {(state.type === "error" || state.type === "warning") && (
+                    <div className={`p-4 mb-4 ${state.type === "error" ? "bg-red-500 text-white" : "bg-yellow-300"} rounded`}>
                         <p>{ state.message }</p>
                     </div>
                 )}
@@ -55,7 +68,7 @@ export default function CreateUsernamePage() {
                         required
                         className={`w-full p-2 mb-4 rounded transition-colors duration-500 ease-in-out ${validInput ? 'bg-gray-100' : 'bg-red-100'}`}
                     />
-                    <SubmitButton validInput={validInput} />
+                    <SubmitButton validInput={validInput} state={state.type} />
                 </form>
             </div>
         </div>

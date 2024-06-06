@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma"
 
 import Image from "next/image"
-import Link from "next/link"
 import PostThumbnail from "@/components/PostThumbnail"
 
 export default async function UserProfile({ params }: { params: { userName: string } }) {
@@ -24,9 +23,7 @@ export default async function UserProfile({ params }: { params: { userName: stri
     return (
         <div className="flex flex-col gap-10">
             <div className="flex flex-row gap-5 items-center">
-                <Link href={`/${user?.id}`}>
-                    <Image src={user?.image as string} alt="" width={50} height={50} className="rounded-full"/>
-                </Link>
+                <Image src={user?.image as string} alt="" width={50} height={50} className="rounded-full"/>
                 <p className="text-3xl">{user?.name}</p>
             </div>
             <div className="flex flex-col gap-5">
