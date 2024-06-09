@@ -1,17 +1,15 @@
-import { prisma } from "@/lib/prisma";
-
 import NewPostButton from "@/components/NewPostButton";
-import PostThumbnail from "@/components/PostThumbnail";
+import getPosts from "@/components/ServerActions/getPosts";
+import PostsList from "@/components/PostsList";
+
+const INITIAL_NUMBER_OF_POSTS = 3
 
 export default async function Home() {
-  const posts = (await prisma.post.findMany()).reverse()
+  const initialPosts = await getPosts(0, INITIAL_NUMBER_OF_POSTS);
 
   return (
     <>
-      <div className="flex flex-col gap-5">
-        {posts.map(post => <PostThumbnail post={post} key={post.id}/>)}
-        <p>There are no more posts 😢</p>
-      </div>
+      <PostsList initialPosts={initialPosts}/>
       <div className="fixed bottom-0 right-0 mb-10 mr-10"><NewPostButton/></div>
     </>
   );

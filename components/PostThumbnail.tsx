@@ -1,15 +1,23 @@
-import { prisma } from '@/lib/prisma';
-
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default async function PostThumbnail({ post } : { post: { id: string, title: string, imageUrl: string, authorId: string, createdAt: Date } }) {
-  const user = await prisma.user.findUnique({
-    where: {
-      id: post.authorId
-    }
-  });
+export default function PostThumbnail({ post } : { post: {
+    author: {
+        userName: string | null;
+        image: string | null;
+        name: string | null;
+    };
+  } & {
+    id: string;
+    title: string;
+    content: string;
+    imageUrl: string;
+    authorId: string;
+    createdAt: Date;
+  } }) {
 
+  const user = post.author;
+  
   return (
     <div className='flex flex-col gap-5'>
       <div className='flex gap-3 p-3 rounded-md transition-colors duration-500 ease-in-out hover:bg-slate-50'>
