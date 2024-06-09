@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma"
-
+import PostsList from "@/components/PostsList"
 import Image from "next/image"
-import PostThumbnail from "@/components/PostThumbnail"
+import getPosts from "@/components/ServerActions/getPosts"
 
 export default async function UserProfile({ params }: { params: { userName: string } }) {
     const user = await prisma.user.findUnique({
@@ -14,11 +14,7 @@ export default async function UserProfile({ params }: { params: { userName: stri
         return <div>User not found</div>
     }
 
-    const posts = await prisma.post.findMany({
-        where: {
-            authorId: user.id
-        }
-    })
+    const posts = await getPosts(0, 3, user.id)
 
     return (
         <div className="flex flex-col gap-10">
@@ -27,7 +23,7 @@ export default async function UserProfile({ params }: { params: { userName: stri
                 <p className="text-3xl">{user?.name}</p>
             </div>
             <div className="flex flex-col gap-5">
-                {posts.map(post => <PostThumbnail post={post} key={post.id}/>)}
+                <PostsList initialPosts={posts} authorId={user.id} />
                 <p>There are no more posts 😢</p>
             </div>
         </div>

@@ -8,7 +8,7 @@ import { useInView } from "react-intersection-observer";
 
 const NUMBER_OF_POSTS_TO_FETCH = 3
 
-export default function PostsList({ initialPosts } : { initialPosts: ({
+export default function PostsList({ initialPosts, authorId } : { initialPosts: ({
         author: {
             userName: string | null;
             image: string | null;
@@ -21,7 +21,7 @@ export default function PostsList({ initialPosts } : { initialPosts: ({
         imageUrl: string;
         authorId: string;
         createdAt: Date;
-    })[] }) {
+    })[], authorId?: string }) {
 
     const [posts, setPosts] = useState(initialPosts);
     const [offset, setOffset] = useState(NUMBER_OF_POSTS_TO_FETCH);
@@ -30,7 +30,7 @@ export default function PostsList({ initialPosts } : { initialPosts: ({
     useEffect(() => {
         if (inView) {
             const fetchPosts = async () => {
-                const newPosts = await getPosts(offset, NUMBER_OF_POSTS_TO_FETCH);
+                const newPosts = await getPosts(offset, NUMBER_OF_POSTS_TO_FETCH, authorId);
                 setPosts([...posts, ...newPosts]);
                 setOffset(offset + NUMBER_OF_POSTS_TO_FETCH);
             };
@@ -42,7 +42,7 @@ export default function PostsList({ initialPosts } : { initialPosts: ({
         <div className="flex flex-col gap-5">
             {posts.map(post => <PostThumbnail post={post} key={post.id}/>)}
             <div ref={ref}>
-                Loading...
+                {inView ? "Loading..." : ""}
             </div>
         </div>
     );
