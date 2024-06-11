@@ -24,7 +24,6 @@ export default async function UserProfile({ params }: { params: { userName: stri
             </div>
             <div className="flex flex-col gap-5">
                 <PostsList initialPosts={posts} authorId={user.id} />
-                <p>There are no more posts 😢</p>
             </div>
         </div>
     )

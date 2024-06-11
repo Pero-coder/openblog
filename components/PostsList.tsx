@@ -25,12 +25,14 @@ export default function PostsList({ initialPosts, authorId } : { initialPosts: (
 
     const [posts, setPosts] = useState(initialPosts);
     const [offset, setOffset] = useState(NUMBER_OF_POSTS_TO_FETCH);
+    const [hasMorePosts, setHasMorePosts] = useState(true);
     const { ref, inView } = useInView();
 
     useEffect(() => {
         if (inView) {
             const fetchPosts = async () => {
                 const newPosts = await getPosts(offset, NUMBER_OF_POSTS_TO_FETCH, authorId);
+                if (newPosts.length === 0) return setHasMorePosts(false);
                 setPosts([...posts, ...newPosts]);
                 setOffset(offset + NUMBER_OF_POSTS_TO_FETCH);
             };
@@ -41,8 +43,8 @@ export default function PostsList({ initialPosts, authorId } : { initialPosts: (
     return (
         <div className="flex flex-col gap-5">
             {posts.map(post => <PostThumbnail post={post} key={post.id}/>)}
-            <div ref={ref}>
-                {inView ? "Loading..." : ""}
+            <div ref={ref} className="text-center">
+                {hasMorePosts ? "Loading..." : "There are no more posts... 😢"}
             </div>
         </div>
     );
