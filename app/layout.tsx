@@ -26,7 +26,7 @@ export default function RootLayout({
         <NextTopLoader shadow="false" color="#3b82f6" />
         <AuthCheck>
           <NavMenu />
-          <main className="flex flex-col items-center justify-center mx-auto max-w-3xl p-5">{children}</main>
+          <main className="flex flex-col items-center justify-center mx-auto max-w-3xl p-5 mt-16">{children}</main>
           {modal}
         </AuthCheck>
       </body>
