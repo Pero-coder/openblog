@@ -10,17 +10,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) { // User is available during sign-in
-        token.userName = (await prisma.user.findUnique({
+        const dbUser = await prisma.user.findUnique({
           where: {
             id: user.id
           }
-        }))?.userName
+        })
+
+        token.userName = dbUser?.userName
+        token.following = dbUser?.following || []
       }
       return token
     },
     session({ session, token }) {
       if (token && token.userName) {
         session.user.userName = token.userName
+        session.user.following = token.following
       }
       return session
     },
