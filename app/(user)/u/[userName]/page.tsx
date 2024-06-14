@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import PostsList from "@/components/PostsList"
 import Image from "next/image"
-import getPosts from "@/components/ServerActions/getPosts"
 import FollowButton from "@/components/FollowButton"
 
 export default async function UserProfile({ params }: { params: { userName: string } }) {
@@ -15,8 +14,6 @@ export default async function UserProfile({ params }: { params: { userName: stri
         return <div>User not found</div>
     }
 
-    const posts = await getPosts(0, 3, user.id)
-
     return (
         <div className="flex flex-col gap-10">
             <div className="flex flex-row gap-5 items-center">
@@ -25,7 +22,7 @@ export default async function UserProfile({ params }: { params: { userName: stri
                 <FollowButton userId={user?.id as string}/>
             </div>
             <div className="flex flex-col gap-5">
-                <PostsList initialPosts={posts} authorId={user.id} />
+                <PostsList authorIds={[user.id]} />
             </div>
         </div>
     )
