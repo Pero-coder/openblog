@@ -2,9 +2,9 @@
 
 import { prisma } from "@/lib/prisma"
 
-export default async function getPosts(offset: number, limit: number, authorId?: string) {
+export default async function getPosts(offset: number, limit: number, authorIds?: string[]) {
     const posts = await prisma.post.findMany({ 
-        where: authorId ? { authorId: authorId } : undefined,
+        where: authorIds ? { authorId: { in: authorIds } } : undefined,
         take: limit, 
         skip: offset,
         orderBy: {

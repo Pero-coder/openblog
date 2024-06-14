@@ -8,30 +8,31 @@ import { useInView } from "react-intersection-observer";
 
 const NUMBER_OF_POSTS_TO_FETCH = 3
 
-export default function PostsList({ initialPosts, authorId } : { initialPosts: ({
-        author: {
-            userName: string | null;
-            image: string | null;
-            name: string | null;
-        };
-    } & {
-        id: string;
-        title: string;
-        content: string;
-        imageUrl: string;
-        authorId: string;
-        createdAt: Date;
-    })[], authorId?: string }) {
+type Post = {
+    author: {
+        userName: string | null;
+        name: string | null;
+        image: string | null;
+    };
+    id: string;
+    title: string;
+    content: string;
+    imageUrl: string;
+    authorId: string;
+    createdAt: Date;
+}
 
-    const [posts, setPosts] = useState(initialPosts);
-    const [offset, setOffset] = useState(NUMBER_OF_POSTS_TO_FETCH);
+export default function PostsList({ authorIds } : { authorIds?: string[] }) {
+
+    const [posts, setPosts] = useState<Post[]>([]);
+    const [offset, setOffset] = useState(0);
     const [hasMorePosts, setHasMorePosts] = useState(true);
     const { ref, inView } = useInView();
 
     useEffect(() => {
         if (inView) {
             const fetchPosts = async () => {
-                const newPosts = await getPosts(offset, NUMBER_OF_POSTS_TO_FETCH, authorId);
+                const newPosts = await getPosts(offset, NUMBER_OF_POSTS_TO_FETCH, authorIds);
                 if (newPosts.length === 0) return setHasMorePosts(false);
                 setPosts([...posts, ...newPosts]);
                 setOffset(offset + NUMBER_OF_POSTS_TO_FETCH);
@@ -42,7 +43,7 @@ export default function PostsList({ initialPosts, authorId } : { initialPosts: (
 
     return (
         <div className="flex flex-col gap-5">
-            {posts.map(post => <PostThumbnail post={post} key={post.id}/>)}
+            {posts?.map(post => <PostThumbnail post={post} key={post.id}/>)}
             <div ref={ref} className="text-center">
                 {hasMorePosts ? "Loading..." : "There are no more posts... 😢"}
             </div>
