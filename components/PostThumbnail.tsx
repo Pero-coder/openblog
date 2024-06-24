@@ -19,8 +19,8 @@ export default function PostThumbnail({ post } : { post: {
   const user = post.author;
   
   return (
-    <div className='flex flex-col gap-5'>
-      <div className='flex gap-3 p-3 rounded-md transition-colors duration-500 ease-in-out hover:bg-slate-50'>
+    <div className='flex flex-col gap-5 max-w-2xl'>
+      <div className='flex gap-3 p-3 rounded-md transition-colors duration-200 ease-in-out hover:bg-slate-50'>
         <div className="w-12 h-12 flex-shrink-0">
           <Link href={`/u/${user?.userName}`}>
             <Image src={user?.image as string} alt="" width={48} height={48} className="rounded-full"/>
@@ -33,11 +33,11 @@ export default function PostThumbnail({ post } : { post: {
           </div>
           <Link href={`/p/${post.id}`} key={post.id}>
             <h1 className="text-2xl font-bold">{post.title}</h1>
-            <img alt="" src={post.imageUrl} className="rounded-md bg-white object-contain border border-gray-400 w-full h-full max-h-96 object-cover"/>
+            <img alt="" src={post.imageUrl} className="rounded-md bg-white border border-gray-400 w-full h-full max-h-96 object-cover"/>
           </Link>
         </div>
       </div>
-      <div className="border-t border-gray-400 my-5"></div>
+      <div className="border-t border-gray-400 my-5 max-w-2xl"></div>
     </div>
   );
 }

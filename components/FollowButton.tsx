@@ -13,11 +13,14 @@ export default function FollowButton({ userId }: { userId: string }) {
     }
 
     return (
-        <button className={`px-4 py-2 rounded ${!following ? "bg-blue-500 text-white" : "bg-white text-blue-500 border border-blue-500"}`} onClick={ async () => {
-            await handleFollow(userId)
-            await update()
-            setFollowing(!following)
-        } }>
+        <button 
+            className={`px-4 py-2 rounded ${!following ? "bg-blue-500 text-white" : "bg-white text-blue-500 border border-blue-500"}`} 
+            onClick={ async () => {
+                setFollowing(!following)
+                await handleFollow(userId)
+                await update()
+            } }
+        >
             {following ? "Unfollow" : "Follow"}
         </button>
     );
