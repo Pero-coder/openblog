@@ -5,6 +5,7 @@ import createPost from "@/components/ServerActions/createPost"
 import { useFormStatus } from "react-dom"
 import Dropzone from "react-dropzone"
 import { useState, useEffect, useRef } from "react"
+import Link from "next/link"
 
 function SubmitButton() {
     const { pending } = useFormStatus()
@@ -76,6 +77,7 @@ export default function CreateNewPost({ openModal, closeModal }: { openModal: bo
                         )}
                     </Dropzone>
                     <p>
+                        <Link href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener noreferrer" className="underline text-gray-400 hover:text-gray-300">Tip! you can use Markdown syntax</Link>
                         <textarea name="content" placeholder="Content..." className="resize-none w-full h-96 placeholder-gray-500 focus:outline-none bg-slate-100 p-5 rounded-md" required />
                     </p>
                     <SubmitButton />
