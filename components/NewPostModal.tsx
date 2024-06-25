@@ -46,7 +46,7 @@ export default function CreateNewPost({ openModal, closeModal }: { openModal: bo
             ref={ref}
             onCancel={closeModal}
         >
-            <button onClick={closeModal} className="fixed top-2 right-2 bg-white rounded-full p-1">
+            <button onClick={closeModal} className="fixed top-6 right-6 bg-slate-50 rounded-full p-1">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6 text-black">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -70,7 +70,7 @@ export default function CreateNewPost({ openModal, closeModal }: { openModal: bo
                             <section >
                                 <div {...getRootProps({className: `cursor-pointer flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-md transition-colors duration-200 ease-in-out ${!isDragActive && "border-gray-300 hover:bg-gray-100"} ${isDragAccept && "border-green-300 bg-green-100"} ${isDragReject && "border-red-300 bg-red-100"}`})}>
                                     <input {...getInputProps({type: "file", accept: "image/*"})} />
-                                    {previewSrc ? <img src={previewSrc} alt="preview" className="max-w-2xl h-auto" /> : <p className="text-gray-500">Drag &apos;n&apos; drop image file here, or click to select</p>}
+                                    {previewSrc ? <img src={previewSrc} alt="preview" className="max-h-xl w-auto" /> : <p className="text-gray-500">Drag &apos;n&apos; drop image file here, or click to select</p>}
                                 </div>
                             </section>
                         )}
