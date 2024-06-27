@@ -33,7 +33,7 @@ export default function PostThumbnail({ post } : { post: {
           </div>
           <Link href={`/p/${post.id}`} key={post.id}>
             <h1 className="text-2xl font-bold">{post.title}</h1>
-            <img alt="" src={post.imageUrl} className="rounded-md bg-white border border-gray-400 w-full h-full max-h-96 object-cover"/>
+            <div><img alt="" src={post.imageUrl} className="rounded-md bg-white border border-gray-400 w-full h-full max-h-96 object-cover"/></div>
           </Link>
         </div>
       </div>
