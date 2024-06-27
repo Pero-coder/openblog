@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import handleLike from "./ServerActions/handleLike";
 
-export default function LikeButton({ initialLikes, postId }: { initialLikes: number, postId: string }) {
-    const [liked, setLiked] = useState(false);
+export default function LikeButton({ initialLikes, initialLikeState, postId }: { initialLikes: number, initialLikeState: boolean, postId: string }) {
+    const [liked, setLiked] = useState(initialLikeState);
     const [likes, setLikes] = useState(initialLikes);
 
     return (

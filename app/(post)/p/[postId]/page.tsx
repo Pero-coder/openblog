@@ -4,9 +4,12 @@ import Image from "next/image"
 import Link from "next/link"
 import Markdown from "react-markdown"
 import LikeButton from "@/components/LikeButton"
+import { auth } from "@/auth"
 
 
 export default async function PostPage({ params }: { params: { postId: string } }) {
+    const session = await auth()
+
     const post = await prisma.post.findUnique({
         where: {
             id: params.postId
@@ -35,9 +38,9 @@ export default async function PostPage({ params }: { params: { postId: string } 
                 <p>{post.createdAt.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
             </div>
             <h1 className="text-3xl font-bold">{post.title}</h1>
-            <p>
-                <LikeButton initialLikes={post.likes.length} postId={post.id}/>
-            </p>
+            {session && <p>
+                <LikeButton initialLikes={post.likes.length} initialLikeState={post.likes.includes(session.user.id as string)} postId={post.id}/>
+            </p>}
             <img alt="" src={post.imageUrl}/>
             <Markdown className="prose lg:prose-xl">{post.content}</Markdown>
         </div>
