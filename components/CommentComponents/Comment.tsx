@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default async function Comment(
+export default function Comment(
     { comment }: { 
         comment: {
             author: {
