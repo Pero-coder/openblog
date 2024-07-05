@@ -1,11 +1,14 @@
 import { prisma } from "@/lib/prisma"
-import FollowButton from "@/components/Buttons/FollowButton"
+import { auth } from "@/auth"
+
 import Image from "next/image"
 import Link from "next/link"
 import Markdown from "react-markdown"
+
 import LikeButton from "@/components/Buttons/LikeButton"
-import { auth } from "@/auth"
-import createComment from "@/components/ServerActions/createComment"
+import FollowButton from "@/components/Buttons/FollowButton"
+import Comment from "@/components/CommentComponents/Comment"
+import NewComment from "@/components/CommentComponents/NewComment"
 
 
 export default async function PostPage({ params }: { params: { postId: string } }) {
@@ -17,7 +20,9 @@ export default async function PostPage({ params }: { params: { postId: string } 
         }
     })
 
-    const createCommentWithId = createComment.bind(null, params.postId)
+    if (!post) {
+        return <div>Post not found</div>
+    }
 
     const comments = await prisma.comments.findMany({
         where: {
@@ -31,6 +36,9 @@ export default async function PostPage({ params }: { params: { postId: string } 
                     name: true
                 }
             }
+        },
+        orderBy: {
+            createdAt: 'desc'
         }
     })
 
@@ -40,9 +48,6 @@ export default async function PostPage({ params }: { params: { postId: string } 
         }
     })
 
-    if (!post) {
-        return <div>User not found</div>
-    }
 
     return (
         <div className="flex flex-col gap-5">
@@ -66,31 +71,9 @@ export default async function PostPage({ params }: { params: { postId: string } 
             </div>
             <div className="border-t border-gray-400 my-5"></div>
             <h3 className="text-xl font-bold">{comments.length} comments:</h3>
-            <form action={createCommentWithId}>
-                <div className="flex gap-3">
-                    <textarea className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" name="comment" placeholder="Add a comment" required></textarea>
-                    <button className="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center max-h-10" type="submit">Comment</button>
-                </div>
-            </form>
+            { session && <NewComment postId={params.postId}/> }
             <div className="flex flex-col gap-5">
-                {comments.map(comment => (
-                    <div key={comment.id} className="flex gap-3 p-4 bg-slate-50 rounded-sm">
-                        <Link href={`/u/${comment.author.userName}`}>
-                            <Image src={comment.author.image as string} alt="" width={50} height={50} className="rounded-full"/>
-                        </Link>
-                        <div className="flex flex-col gap-2 w-full">
-                            <Link href={`/u/${comment.author.userName}`}>
-                                <p className="font-bold hover:underline">{comment.author.name}</p>
-                            </Link>
-                            <p>{comment.content}</p>
-                            <div className="flex flex-row gap-2 italic text-sm justify-end">
-                                <p>Commented at:</p>
-                                <p>{comment.createdAt.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
-                                <p>{comment.createdAt.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+                { comments.map(comment => <Comment comment={comment} key={comment.id}/>) }
             </div>
         </div>
     )
