@@ -4,7 +4,7 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import handleLike from "./ServerActions/handleLike";
+import handleLike from "../ServerActions/handleLike";
 
 export default function LikeButton({ initialLikes, initialLikeState, postId }: { initialLikes: number, initialLikeState: boolean, postId: string }) {
     const [liked, setLiked] = useState(initialLikeState);

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import CreateNewPost from "@/components/NewPostModal"
+import CreateNewPost from "@/components/NewPostComponents/NewPostModal"
 
 export default function NewPostButton() {
     const [modal, setModal] = useState(false)

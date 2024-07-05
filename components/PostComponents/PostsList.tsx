@@ -1,6 +1,6 @@
 "use client"
 
-import PostThumbnail from "@/components/PostThumbnail";
+import PostThumbnail from "@/components/PostComponents/PostThumbnail";
 import getPosts from "@/components/ServerActions/getPosts";
 
 import { useEffect, useState } from "react";

@@ -2,7 +2,7 @@ import Link from "next/link"
 import { auth } from "@/auth"
 
 import { SignOut } from "@/components/SignButtons/sign-out"
-import ProfileButton from "@/components/ProfileButton"
+import ProfileButton from "@/components/Buttons/ProfileButton"
 import { SignIn } from "@/components/SignButtons/sign-in"
 
 export default async function NavMenu() {

@@ -1,5 +1,5 @@
-import NewPostButton from "@/components/NewPostButton";
-import Posts from "@/components/Posts";
+import NewPostButton from "@/components/NewPostComponents/NewPostButton";
+import Posts from "@/components/PostComponents/Posts";
 
 export default async function Home() {
   return (

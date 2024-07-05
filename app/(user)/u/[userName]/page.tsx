@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma"
-import PostsList from "@/components/PostsList"
+import PostsList from "@/components/PostComponents/PostsList"
 import Image from "next/image"
-import FollowButton from "@/components/FollowButton"
+import FollowButton from "@/components/Buttons/FollowButton"
 
 export default async function UserProfile({ params }: { params: { userName: string } }) {
     const user = await prisma.user.findUnique({

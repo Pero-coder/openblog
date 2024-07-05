@@ -1,9 +1,9 @@
 import { prisma } from "@/lib/prisma"
-import FollowButton from "@/components/FollowButton"
+import FollowButton from "@/components/Buttons/FollowButton"
 import Image from "next/image"
 import Link from "next/link"
 import Markdown from "react-markdown"
-import LikeButton from "@/components/LikeButton"
+import LikeButton from "@/components/Buttons/LikeButton"
 import { auth } from "@/auth"
 import createComment from "@/components/ServerActions/createComment"
 
