@@ -1,22 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import LikeButton from '../Buttons/LikeButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment } from '@fortawesome/free-regular-svg-icons';
+import { useSession } from 'next-auth/react';
+import type { PostsType } from '../ServerActions/getPosts';
 
-export default function PostThumbnail({ post } : { post: {
-    author: {
-        userName: string | null;
-        image: string | null;
-        name: string | null;
-    };
-  } & {
-    id: string;
-    title: string;
-    content: string;
-    imageUrl: string;
-    authorId: string;
-    createdAt: Date;
-  } }) {
+export default function PostThumbnail({ post } : { post: PostsType[0] }) {
 
   const user = post.author;
+  const { data: session } = useSession();
   
   return (
     <div className='flex flex-col gap-5 max-w-2xl'>
@@ -29,12 +22,20 @@ export default function PostThumbnail({ post } : { post: {
         <div className="flex flex-col gap-3 flex-grow">
           <div className='flex items-center justify-between'>
             <Link href={`/u/${user?.userName}`} className='font-bold hover:underline'>{user?.name}</Link>
-            <p className='text-sm'>{`${post.createdAt.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false })} ${post.createdAt.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}`}</p>
           </div>
           <Link href={`/p/${post.id}`} key={post.id}>
             <h1 className="text-2xl font-bold">{post.title}</h1>
             <div><img alt="" src={post.imageUrl} className="rounded-md bg-white border border-gray-400 w-full h-full max-h-96 object-cover"/></div>
           </Link>
+          <div className="flex flex-row gap-2 italic justify-end">
+            <p className='text-sm'>{`${post.createdAt.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false })} ${post.createdAt.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}`}</p>
+          </div>
+          <div className='flex flex-row gap-5'>
+            <LikeButton initialLikes={post.likes.length} initialLikeState={session ? post.likes.includes(session?.user.id as string) : false} postId={post.id}/>
+            <div>
+              <FontAwesomeIcon icon={faComment} size='lg' color='#111111'/> <span className='mx-2'>{post._count.comments}</span>
+            </div>
+          </div>
         </div>
       </div>
       <div className="border-t border-gray-400 my-5 max-w-2xl"></div>

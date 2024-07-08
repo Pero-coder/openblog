@@ -17,9 +17,16 @@ export default async function getPosts(offset: number, limit: number, authorIds?
                     image: true,
                     name: true
                 }
+            },
+            _count: {
+                select: {
+                    comments: true
+                }
             }
         }
     });
 
     return posts
 }
+
+export type PostsType = Awaited<ReturnType<typeof getPosts>>;
