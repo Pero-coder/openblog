@@ -25,7 +25,7 @@ export default function PostThumbnail({ post } : { post: PostsType[0] }) {
           </div>
           <Link href={`/p/${post.id}`} key={post.id}>
             <h1 className="text-2xl font-bold">{post.title}</h1>
-            <div><img alt="" src={post.imageUrl} className="rounded-md bg-white border border-gray-400 w-full h-full max-h-96 object-cover"/></div>
+            <div><img alt="" src={post.imageUrl} className="rounded-md bg-white border border-gray-400 w-full h-full max-h-96 object-contain"/></div>
           </Link>
           <div className="flex flex-row gap-2 italic justify-end">
             <p className='text-sm'>{`${post.createdAt.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false })} ${post.createdAt.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}`}</p>
