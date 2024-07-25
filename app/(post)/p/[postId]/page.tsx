@@ -66,7 +66,7 @@ export default async function PostPage({ params }: { params: { postId: string } 
             <p>
                 <LikeButton initialLikes={post.likes.length} initialLikeState={session ? post.likes.includes(session.user.id as string) : false} postId={post.id}/>
             </p>
-            <div className="max-h-96"><img alt="" src={post.imageUrl} className="w-full h-full max-h-96"/></div>
+            <div className="flex justify-center items-center max-h-96"><img alt="" src={post.imageUrl} className="w-auto h-full max-h-96"/></div>
             <Markdown className="prose lg:prose-xl">{post.content}</Markdown>
             <div className="flex flex-row gap-2 italic justify-end">
                 <p>Posted at:</p>
