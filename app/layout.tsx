@@ -32,6 +32,7 @@ export default function RootLayout({
           <NavMenu />
           <main className="flex flex-col items-center justify-center mx-auto max-w-3xl p-5 mt-16">{children}</main>
           {modal}
+          <div id="modal-root" />
         </AuthCheck>
       </body>
     </html>

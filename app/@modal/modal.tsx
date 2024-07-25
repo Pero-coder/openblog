@@ -1,14 +1,18 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useRef } from "react"
+import { createPortal } from "react-dom"
 
 export function Modal({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
   const router = useRouter()
   const dialogRef = useRef<React.ElementRef<"dialog">>(null)
 
   useEffect(() => {
-    dialogRef.current?.showModal()
+    if (!dialogRef.current?.open) {
+      dialogRef.current?.showModal();
+    }
 
     // Disable scrolling on the body by setting overflow to hidden
     document.body.style.overflow = 'hidden';
@@ -19,7 +23,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
     };
   }, [])
 
-  return (
+  return createPortal(
     <dialog
       ref={dialogRef}
       onClose={router.back}
@@ -31,6 +35,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
         </svg>
       </button>
       <div>{ children }</div>
-    </dialog>
+    </dialog>,
+    document.getElementById('modal-root')!
   )
 }
