@@ -1,5 +1,5 @@
 import { auth } from "@/auth"
-import EditPostSubmitButton from "@/components/PostComponents/EditPostSubmitButton"
+import SubmitButton from "@/components/Buttons/SubmitButton"
 import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 
@@ -57,7 +57,7 @@ export default async function EditPostPage({ params }: { params: { postId: strin
                     </textarea>
                 </p>
             </div>
-            <EditPostSubmitButton />
+            <SubmitButton value="Edit post" pendingMessage="Editing post..." />
         </form>
     )
 }
