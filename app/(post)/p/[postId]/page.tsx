@@ -51,7 +51,7 @@ export default async function PostPage({ params }: { params: { postId: string } 
 
 
     return (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 w-full">
             <div className="flex flex-row gap-5 items-center">
                 <Link href={`/u/${user?.userName}`} className="flex flex-row flex-shrink-0 gap-3 hover:underline">
                     <Image src={user?.image as string} alt="" width={50} height={50} className="rounded-full"/>

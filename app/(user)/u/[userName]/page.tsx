@@ -25,18 +25,22 @@ export default async function UserProfile({
     }
 
     return (
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-10 w-full">
             <div className="flex flex-col gap-3">
-                <div className="flex flex-row gap-5 items-center">
-                    <div className="flex gap-3 flex-shrink-0">
+                <div className="flex gap-5">
+                    <div className="flex gap-5 flex-shrink-0">
                         <Image
                             src={user?.image as string}
                             alt=""
-                            width={50}
-                            height={50}
-                            className="rounded-full"
+                            width={150}
+                            height={150}
+                            className="rounded-full w-[150px] h-[150px]"
                         />
-                        <p className="text-3xl">{user?.name}</p>
+                        <div className="flex flex-col">
+                            <p className="text-3xl">{user?.name}</p>
+                            <p className="text-gray-500 italic">@{user?.userName}</p>
+                            <div className="whitespace-pre-wrap my-5"><p className="font-bold">Bio:</p>{user?.bio}</div>
+                        </div>
                     </div>
                     {session?.user.id === user.id ? (
                         <div className="w-full flex justify-end">
@@ -46,10 +50,11 @@ export default async function UserProfile({
                             </Link>
                         </div>
                     ) : (
-                        <FollowButton userId={user?.id as string} />
+                        <div>
+                            <FollowButton userId={user?.id as string} />
+                        </div>
                     )}
                 </div>
-                <p>{user?.bio}</p>
             </div>
             <div className="border-t border-gray-400"></div>
             <div className="flex flex-col gap-5">

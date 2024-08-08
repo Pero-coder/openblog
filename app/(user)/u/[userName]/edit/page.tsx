@@ -69,10 +69,9 @@ export default async function EditUserPage({
                     <textarea
                         name="bio"
                         placeholder="Bio..."
+                        defaultValue={user?.bio as string}
                         className="resize-none w-full min-h-64 placeholder-gray-500 focus:outline-none bg-slate-50 p-5 rounded-md"
-                    >
-                        {user?.bio}
-                    </textarea>
+                    />
                 </div>
                 <SubmitButton
                     value="Edit profile"

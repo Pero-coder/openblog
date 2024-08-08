@@ -6,6 +6,7 @@ import type { PostsType } from "@/components/ServerActions/getPosts";
 
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import PostThumbnailSkeleton from "../Skeletons/PostThumbnailSkeleton";
 
 const NUMBER_OF_POSTS_TO_FETCH = 3
 
@@ -31,8 +32,8 @@ export default function PostsList({ authorIds } : { authorIds?: string[] }) {
     return (
         <div className="flex flex-col gap-5">
             {posts?.map(post => <PostThumbnail post={post} key={post.id}/>)}
-            <div ref={ref} className="text-center">
-                {hasMorePosts ? "Loading..." : "There are no more posts... 😢"}
+            <div ref={ref} hidden={!hasMorePosts}>
+                <PostThumbnailSkeleton/>
             </div>
         </div>
     );
