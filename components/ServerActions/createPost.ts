@@ -22,8 +22,6 @@ const schema = z.object({
 });
 
 export default async function createPost(form: FormData) {
-    console.log(form.get("image"));
-
     const session = await auth()
     
     if (!session) {
