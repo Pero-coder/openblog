@@ -5,20 +5,12 @@ import { put } from '@vercel/blob'
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 import { z } from "zod"
-
-const MAX_FILE_SIZE = 4.5 * 1024 * 1024; // 4.5 MB in bytes
-const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
-
-const fileSchema = z.instanceof(File).refine(file => file.size <= MAX_FILE_SIZE, {
-    message: "File size should be less than 4.5 MB",
-}).refine(file => ACCEPTED_IMAGE_TYPES.includes(file.type), {
-    message: "Invalid file type. Only JPEG, PNG, and WEBP are allowed",
-});
+import { contentSchema, fileSchema, titleSchema } from "../schemas"
 
 const schema = z.object({
-    title: z.string().min(1),
+    title: titleSchema,
     image: fileSchema,
-    content: z.string().min(1),
+    content: contentSchema,
 });
 
 export default async function createPost(form: FormData) {
@@ -40,7 +32,7 @@ export default async function createPost(form: FormData) {
         return "Invalid form: " + JSON.stringify(validated.error.errors);
     }
 
-    const imageFile = validated.data.image as File;
+    const imageFile = validated.data.image;
 
     const blob = await put(imageFile.name, imageFile, {
         access: 'public',

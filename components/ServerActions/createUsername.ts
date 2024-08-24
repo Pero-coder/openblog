@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma"
 import { auth } from "@/auth"
 import { z } from "zod"
+import { usernameSchema } from "../schemas"
 
 export default async function createUsername(prevState: any, form: FormData) {
     const session = await auth()
@@ -14,14 +15,7 @@ export default async function createUsername(prevState: any, form: FormData) {
         }
     }
 
-    const username = z
-        .string()
-        .min(1)
-        .max(20)
-        .refine((value) => encodeURIComponent(value) === value, {
-            message: "Username must be URL safe"
-        })
-        .safeParse(form.get("userName"))
+    const username = usernameSchema.safeParse(form.get("userName"))
 
     if (!username.success) {
         return {
