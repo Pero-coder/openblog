@@ -2,7 +2,6 @@
 
 import { prisma } from "@/lib/prisma"
 import { auth } from "@/auth"
-import { z } from "zod"
 import { usernameSchema } from "../schemas"
 
 export default async function createUsername(prevState: any, form: FormData) {

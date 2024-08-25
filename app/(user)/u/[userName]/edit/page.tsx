@@ -3,7 +3,6 @@ import SubmitButton from "@/components/Buttons/SubmitButton";
 import SelectImage from "@/components/SelectImage";
 import editProfile from "@/components/ServerActions/editProfile";
 import { prisma } from "@/lib/prisma";
-import Image from "next/image";
 
 export default async function EditUserPage({
     params,

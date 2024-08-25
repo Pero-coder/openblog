@@ -1,5 +1,7 @@
 import { auth } from "@/auth";
 import SubmitButton from "@/components/Buttons/SubmitButton";
+import ImageDropzone from "@/components/ImageDropzone";
+import editPost from "@/components/ServerActions/editPost";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 
@@ -30,22 +32,12 @@ export default async function EditPostPage({
         return <div>Not authenticated</div>;
     }
 
+    const editPostWithId = editPost.bind(null, post.id);
+
     return (
         <form
             className="w-full"
-            action={async (form) => {
-                "use server";
-                await prisma.post.update({
-                    where: {
-                        id: post.id,
-                    },
-                    data: {
-                        title: (form.get("title") as string) || undefined,
-                        content: (form.get("content") as string) || undefined,
-                    },
-                });
-                redirect(`/p/${post.id}`);
-            }}
+            action={editPostWithId}
         >
             <div className="flex flex-col gap-5">
                 <h1 className="text-xl">Edit post</h1>
@@ -58,13 +50,9 @@ export default async function EditPostPage({
                         className="w-full h-14 text-2xl placeholder-gray-500 focus:outline-none bg-slate-50 p-5 rounded-md"
                     />
                 </p>
-                <div className="max-h-96">
-                    <img
-                        alt=""
-                        src={post.imageUrl}
-                        className="w-full h-full max-h-96"
-                    />
-                </div>
+                
+                <ImageDropzone preview={post.imageUrl} />
+
                 <p>
                     <textarea
                         name="content"
