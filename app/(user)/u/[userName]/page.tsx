@@ -34,7 +34,7 @@ export default async function UserProfile({
                             alt=""
                             width={150}
                             height={150}
-                            className="rounded-full w-[150px] h-[150px]"
+                            className="rounded-full w-[150px] h-[150px] object-cover"
                         />
                         <div className="flex flex-col">
                             <p className="text-3xl">{user?.name}</p>

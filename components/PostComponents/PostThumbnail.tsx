@@ -20,7 +20,7 @@ export default function PostThumbnail({ post }: { post: PostsType[0] }) {
                             alt=""
                             width={48}
                             height={48}
-                            className="rounded-full"
+                            className="rounded-full object-cover"
                         />
                     </Link>
                 </div>
@@ -37,8 +37,10 @@ export default function PostThumbnail({ post }: { post: PostsType[0] }) {
                     <Link href={`/p/${post.id}`} key={post.id}>
                         <h1 className="text-2xl font-bold">{post.title}</h1>
                         <div>
-                            <img
+                            <Image
                                 alt=""
+                                width={683}
+                                height={384}
                                 src={post.imageUrl}
                                 className="rounded-md bg-white border border-gray-400 w-full h-full max-h-96 object-contain"
                             />
