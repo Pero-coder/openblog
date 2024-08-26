@@ -2,7 +2,7 @@
 
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { put } from "@vercel/blob";
+import { put, del } from "@vercel/blob";
 import { redirect } from "next/navigation";
 import { bioSchema, fileSchema, nameSchema } from "../schemas";
 
@@ -26,6 +26,8 @@ export default async function editProfile(formData: FormData) {
             access: "public",
             contentType: image.type
         });
+
+        await del(user?.image as string);
         
         await prisma.user.update({
             where: {

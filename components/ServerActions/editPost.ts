@@ -4,7 +4,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { contentSchema, fileSchema, titleSchema } from "../schemas";
 import { redirect } from "next/navigation";
-import { put } from "@vercel/blob";
+import { del, put } from "@vercel/blob";
 
 export default async function editPost(postId: string, form: FormData) {
     const session = await auth();
@@ -34,6 +34,8 @@ export default async function editPost(postId: string, form: FormData) {
             access: "public",
             contentType: image.type
         });
+
+        await del(post.imageUrl);
         
         await prisma.post.update({
             where: {
