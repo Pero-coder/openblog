@@ -62,9 +62,9 @@ export default async function PostPage({
                     <Image
                         src={user?.image as string}
                         alt=""
-                        width={50}
-                        height={50}
-                        className="rounded-full object-cover"
+                        width={70}
+                        height={70}
+                        className="rounded-full object-cover w-[50px] h-[50px]"
                     />
                     <div>
                         <p className="font-bold">{user?.name}</p>

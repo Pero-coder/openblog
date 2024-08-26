@@ -37,9 +37,7 @@ export default function SelectImage({ image }: { image: string }) {
                 <img
                     src={preview}
                     alt=""
-                    width={250}
-                    height={250}
-                    className="rounded-full cursor-pointer"
+                    className="rounded-full cursor-pointer w-[250px] h-[250px] object-cover"
                 />
                 <FontAwesomeIcon
                     icon={faPen}

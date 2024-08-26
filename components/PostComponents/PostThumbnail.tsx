@@ -18,9 +18,9 @@ export default function PostThumbnail({ post }: { post: PostsType[0] }) {
                         <Image
                             src={user?.image as string}
                             alt=""
-                            width={48}
-                            height={48}
-                            className="rounded-full object-cover"
+                            width={70}
+                            height={70}
+                            className="rounded-full object-cover w-[50px] h-[50px]"
                         />
                     </Link>
                 </div>

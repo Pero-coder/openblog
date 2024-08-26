@@ -8,7 +8,7 @@ export default async function ProfileButton() {
 
     return (
         <Link href={`/u/${session.user?.userName}`}>
-            <Image src={session.user?.image as string} alt="" width={50} height={50} className="rounded-full object-cover" />
+            <Image src={session.user?.image as string} alt="" width={70} height={70} className="rounded-full w-[50px] h-[50px] object-cover" />
         </Link>
     )
 }

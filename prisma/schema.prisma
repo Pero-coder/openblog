@@ -88,7 +88,7 @@ model Post {
   content   String
   imageUrl  String
   likes     String[]
-  author    User     @relation(fields: [authorId], references: [id])
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   comments  Comments[]
   authorId  String
   createdAt DateTime @default(now())
@@ -99,7 +99,7 @@ model Comments {
   content   String
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String
   createdAt DateTime @default(now())
 }
