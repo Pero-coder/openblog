@@ -10,6 +10,7 @@ import FollowButton from "@/components/Buttons/FollowButton";
 import Comment from "@/components/CommentComponents/Comment";
 import NewComment from "@/components/CommentComponents/NewComment";
 import EditButton from "@/components/Buttons/EditButton";
+import DeleteButton from "@/components/Buttons/DeleteButton";
 
 export default async function PostPage({
     params,
@@ -74,8 +75,9 @@ export default async function PostPage({
                     </div>
                 </Link>
                 {session?.user.id === user?.id ? (
-                    <div className="w-full flex justify-end">
+                    <div className="w-full flex gap-3 justify-end">
                         <EditButton postId={params.postId} />
+                        <DeleteButton postId={params.postId} />
                     </div>
                 ) : (
                     <FollowButton userId={user?.id as string} />

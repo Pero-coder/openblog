@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function EditButton({ postId }: { postId: string }) {
     return (
         <Link href={`/p/${postId}/edit`}>
-            <FontAwesomeIcon icon={faPenToSquare} /> Edit post
+            <FontAwesomeIcon icon={faPenToSquare} /> Edit
         </Link>
     );
 }
