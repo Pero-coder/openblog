@@ -2,9 +2,14 @@
 
 import { useState } from "react"
 import CreateNewPost from "@/components/NewPostComponents/NewPostModal"
+import type { Session } from "next-auth"
 
-export default function NewPostButton() {
+export default function NewPostButton({ session }: { session: Session | null }) {
     const [modal, setModal] = useState(false)
+
+    if (!session) {
+        return null
+    }
 
     return (
         <>
