@@ -30,7 +30,7 @@ export default function PostsList({ authorIds } : { authorIds?: string[] }) {
     }, [inView]);
 
     return (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 min-w-full">
             {posts?.map(post => <PostThumbnail post={post} key={post.id}/>)}
             <div ref={ref} hidden={!hasMorePosts}>
                 <PostThumbnailSkeleton/>

@@ -3,6 +3,7 @@
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { del } from "@vercel/blob";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export default async function deletePost(postId: string) {

@@ -28,8 +28,8 @@ export default function Posts() {
                             followPosts && "border-b-4 border-blue-500"
                         }`}
                         onClick={() => {
+                            setFollowPosts(true);
                             startTransition(async () => {
-                                setFollowPosts(true);
                                 setFollowIds(
                                     (await getSession())?.user.following || []
                                 );
@@ -41,11 +41,13 @@ export default function Posts() {
                 </div>
             )}
             {followPosts ? (
-                <PostsList key="all_posts" authorIds={followIds} />
-            ) : isPending ? (
-                <PostThumbnailSkeleton />
+                isPending ? (
+                    <PostThumbnailSkeleton />
+                ) : (
+                    <PostsList key="follow_posts" authorIds={followIds} />
+                )
             ) : (
-                <PostsList key="follow_posts" />
+                <PostsList key="all_posts" />
             )}
         </>
     );
