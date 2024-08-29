@@ -21,9 +21,11 @@ export default function PostsList({ authorIds } : { authorIds?: string[] }) {
         if (inView) {
             const fetchPosts = async () => {
                 const newPosts = await getPosts(offset, NUMBER_OF_POSTS_TO_FETCH, authorIds);
-                if (newPosts.length === 0) return setHasMorePosts(false);
                 setPosts([...posts, ...newPosts]);
                 setOffset(offset + NUMBER_OF_POSTS_TO_FETCH);
+                if (newPosts.length < NUMBER_OF_POSTS_TO_FETCH) {
+                    setHasMorePosts(false);
+                }
             };
             fetchPosts();
         }
@@ -31,7 +33,7 @@ export default function PostsList({ authorIds } : { authorIds?: string[] }) {
 
     return (
         <div className="flex flex-col gap-5 min-w-full">
-            {posts?.map(post => <PostThumbnail post={post} key={post.id}/>)}
+            {posts.map(post => <PostThumbnail post={post} key={post.id}/>)}
             <div ref={ref} hidden={!hasMorePosts}>
                 <PostThumbnailSkeleton/>
             </div>
